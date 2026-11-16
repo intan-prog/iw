@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tanspace — Cafe untuk Ngopi, Kerja & Nongkrong</title>
+  <meta name="description" content="Tanspace: cafe modern untuk ngopi, bekerja, dan bertemu. Kopi pilihan, suasana hangat, ruang yang nyaman." />
+  <meta name="theme-color" content="#F5EFE6" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tanspace — Ruang untuk ngopi, fokus, dan bertemu" />
+  <meta property="og:description" content="Cafe modern dengan suasana hangat dan kopi pilihan." />
+  <meta property="og:image" content="/og-image.jpg" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <!-- Set tema sebelum render agar tidak berkedip -->
+  <script>
+    try {
+      const s = localStorage.getItem('tanspace-theme');
+      const m = s || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = m;
+    } catch (e) {}
+  </script>
+</head>
+<body class="is-loading">
+  <a class="skip" href="#hero">Lompat ke konten</a>
+
+  <!-- Loading screen -->
+  <div class="loader" role="status" aria-live="polite">
+    <div class="loader__logo">Tan<span>space</span></div>
+    <div class="loader__bar"><span></span></div>
+    <div class="loader__pct">0%</div>
+  </div>
+
+  <!-- Custom cursor (hanya perangkat dengan mouse) -->
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Kanvas 3D fixed di belakang konten -->
+  <canvas id="webgl" aria-hidden="true"></canvas>
+
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#hero" aria-label="Tanspace, kembali ke atas">Tan<span>space</span></a>
+    <nav id="menu" class="nav__links" aria-label="Navigasi utama">
+      <a href="#tentang">Tentang</a>
+      <a href="#interior">Interior</a>
+      <a href="#menu-kopi">Menu</a>
+      <a href="#reservasi">Reservasi</a>
+      <a href="#lokasi">Lokasi</a>
+    </nav>
+    <div class="nav__actions">
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Ganti mode gelap/terang" aria-pressed="false"><span aria-hidden="true">◐</span></button>
+      <button id="menu-toggle" class="icon-btn nav__burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Buka menu"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="hero">
+      <div class="hero__content">
+        <p class="eyebrow" data-reveal>Cafe · Co-working · Ngopi</p>
+        <h1 data-reveal>Ruang untuk <em>ngopi</em>, fokus, dan bertemu.</h1>
+        <p class="hero__lead" data-reveal>Tanspace adalah tempat nongkrong modern dengan kopi pilihan, cahaya hangat, dan meja yang betah dipakai seharian.</p>
+        <div class="hero__cta" data-reveal>
+          <a class="btn btn--primary" href="#menu-kopi" data-cursor="Menu">Lihat Menu</a>
+          <a class="btn btn--ghost" href="#reservasi" data-cursor="Pesan">Reservasi</a>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">Scroll</div>
+
+      <!-- Fallback statis jika WebGL tidak didukung -->
+      <div class="fallback" aria-hidden="true">
+        <svg viewBox="0 0 200 160" width="320">
+          <ellipse cx="100" cy="134" rx="80" ry="12" fill="#EADFCF"/>
+          <path d="M45 50h110v30a45 45 0 0 1-45 45h-20a45 45 0 0 1-45-45z" fill="#C8793A"/>
+          <path d="M155 60h10a16 16 0 0 1 0 32h-12" fill="none" stroke="#C8793A" stroke-width="9"/>
+        </svg>
+      </div>
+    </section>
+
+        <!-- ===== Tentang ===== -->
+    <section id="tentang" class="section">
+      <div class="about2">
+        <div class="about2__intro">
+          <p class="eyebrow" data-scroll>Tentang Tanspace</p>
+          <h2 class="section__title" data-scroll>Bukan sekadar tempat <em>ngopi</em>.</h2>
+          <p class="section__lead" data-scroll>Tanspace dibuat untuk orang yang butuh ruang: untuk menyelesaikan pekerjaan, bertemu teman, atau sekadar duduk tenang dengan secangkir kopi yang enak.</p>
+          <p class="about2__story" data-scroll>Kami percaya tempat yang baik tidak harus ramai. Cukup ada kopi yang diseduh dengan teliti, meja yang betah dipakai seharian, dan suasana yang membuatmu ingin kembali lagi.</p>
+          <div class="about2__cta" data-scroll>
+            <a class="btn btn--primary" href="#interior" data-cursor="Lihat">Lihat ruangan</a>
+            <a class="btn btn--ghost" href="#menu-kopi" data-cursor="Menu">Lihat menu</a>
+          </div>
+        </div>
+
+        <div class="about2__stats">
+          <div class="stat" data-scroll>
+            <b class="stat__num"><span data-count="3">3</span></b>
+            <span class="stat__label">Ruangan dengan suasana berbeda</span>
+          </div>
+          <div class="stat" data-scroll>
+            <b class="stat__num"><span data-count="22">22</span></b>
+            <span class="stat__label">Meja siap dipesan</span>
+          </div>
+          <div class="stat" data-scroll>
+            <b class="stat__num"><span data-count="34">34</span><i>+</i></b>
+            <span class="stat__label">Pilihan kopi, makanan, dan camilan</span>
+          </div>
+        </div>
+      </div>
+
+      <ul class="about2__features">
+        <li class="feat" data-scroll>
+          <span class="feat__icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5a10 10 0 0 1 14 0"/><path d="M8.5 16a5 5 0 0 1 7 0"/><circle cx="12" cy="19.2" r="1"/></svg></span>
+          <strong>Wi-Fi cepat</strong>
+          <span>Stabil untuk meeting online dan kerja seharian.</span>
+        </li>
+        <li class="feat" data-scroll>
+          <span class="feat__icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3v4M15 3v4"/><path d="M6 7h12v4a6 6 0 0 1-6 6 6 6 0 0 1-6-6z"/><path d="M12 17v4"/></svg></span>
+          <strong>Colokan di banyak meja</strong>
+          <span>Laptop dan ponsel aman, tidak perlu rebutan.</span>
+        </li>
+        <li class="feat" data-scroll>
+          <span class="feat__icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h11v5a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 9h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M8 3v2M11 3v2"/></svg></span>
+          <strong>Kopi pilihan</strong>
+          <span>Biji kopi disangrai segar, diseduh dengan teliti.</span>
+        </li>
+        <li class="feat" data-scroll>
+          <span class="feat__icon"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/><path d="M3 11a2 2 0 0 1 4 0v3h10v-3a2 2 0 0 1 4 0v6H3z"/><path d="M6 17v2M18 17v2"/></svg></span>
+          <strong>Tiga ruang berbeda</strong>
+          <span>Working, Coffee Bar, atau Sudut Santai. Pilih sesukamu.</span>
+        </li>
+      </ul>
+
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>Kopi pilihan</span><i>✦</i><span>Ruang kerja</span><i>✦</i><span>Nongkrong</span><i>✦</i><span>Wi-Fi cepat</span><i>✦</i>
+          <span>Kopi pilihan</span><i>✦</i><span>Ruang kerja</span><i>✦</i><span>Nongkrong</span><i>✦</i><span>Wi-Fi cepat</span><i>✦</i>
+          <span>Kopi pilihan</span><i>✦</i><span>Ruang kerja</span><i>✦</i><span>Nongkrong</span><i>✦</i><span>Wi-Fi cepat</span><i>✦</i>
+          <span>Kopi pilihan</span><i>✦</i><span>Ruang kerja</span><i>✦</i><span>Nongkrong</span><i>✦</i><span>Wi-Fi cepat</span><i>✦</i>
+        </div>
+      </div>
+    </section>
+
+        <!-- ===== Interior: denah meja ===== -->
+    <section id="interior" class="section section--alt">
+      <div class="section__head">
+        <p class="eyebrow" data-scroll>Interior &amp; Ketersediaan Meja</p>
+        <h2 class="section__title" data-scroll>Tiga ruang, pilih <em>mejamu</em>.</h2>
+        <p class="section__lead" data-scroll>Hijau berarti kosong, merah berarti terisi. Klik meja untuk melihat detailnya.</p>
+      </div>
+      <div id="interior-app" class="venue" data-scroll></div>
+    </section>
+
+
+        <!-- ===== Menu modern ===== -->
+    <section id="menu-kopi" class="section">
+      <div class="section__head">
+        <p class="eyebrow" data-scroll>Menu</p>
+        <h2 class="section__title" data-scroll>Pilih <em>favoritmu</em>.</h2>
+        <p class="section__lead" data-scroll>Tekan Tambah untuk memilih, lalu kirim pesananmu lewat WhatsApp.</p>
+      </div>
+      <div id="menu-app" class="mn"></div>
+    </section>
+
+
+    <!-- Placeholder: diisi di langkah berikutnya -->
+        <!-- ===== Reservasi ===== -->
+    <section id="reservasi" class="section section--alt">
+      <div class="section__head">
+        <p class="eyebrow" data-scroll>Reservasi</p>
+        <h2 class="section__title" data-scroll>Amankan <em>mejamu</em>.</h2>
+        <p class="section__lead" data-scroll>Pilih ruangan, jam, dan meja yang kosong. Selesai dalam hitungan detik.</p>
+      </div>
+      <div id="reserve-app" class="rsv" data-scroll></div>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
