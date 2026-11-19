@@ -5,8 +5,8 @@ import { categories } from '../data/menu.js';
 
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// GANTI dengan nomor WhatsApp cafe (format internasional tanpa +, contoh: 6281234567890)
-const WA_NUMBER = '6281234567890';
+// GANTI dengan nomor WhatsApp cafe (format internasional tanpa +, contoh: 6288983266526)
+const WA_NUMBER = '6288983266526';
 
 const rupiah = (n) => 'Rp' + n.toLocaleString('id-ID');
 const svg = (p) => `<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p}</svg>`;
