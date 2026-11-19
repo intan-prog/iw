@@ -554,3 +554,31 @@
   .rsv-admin__list li { grid-template-columns: 1fr; }
   .rsv-admin__when { text-align: left; }
 }
+/* ---------- Fix overflow mobile ---------- */
+.venue__layout,
+.rsv__grid { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+.rsv__grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); }
+
+.venue__layout > *,
+.rsv__grid > *,
+.rsv__form > *,
+.about2 > *,
+.mn,
+.mn-grid > * { min-width: 0; }
+
+.rsv__form { grid-template-columns: minmax(0, 1fr); }
+.plan-wrap { max-width: 100%; -webkit-overflow-scrolling: touch; }
+.rsv-dates, .mn-tabs { max-width: 100%; }
+
+@media (max-width: 960px) {
+  .rsv__grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 860px) {
+  .venue__layout { grid-template-columns: minmax(0, 1fr); }
+  .about2 { grid-template-columns: minmax(0, 1fr); }
+  .about2__stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .about2__stats,
+  .about2__features { grid-template-columns: minmax(0, 1fr); }
+}

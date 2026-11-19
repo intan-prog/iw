@@ -74,18 +74,24 @@ export function createScene(canvas) {
     pointer.y = (e.clientY / innerHeight) * 2 - 1;
   });
 
-  function resize() {
-    const w = innerWidth, h = innerHeight;
-    renderer.setPixelRatio(quality.pixelRatio);
-    renderer.setSize(w, h, false);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-    composer.setPixelRatio(quality.pixelRatio);
-    composer.setSize(w, h);
-    resizers.forEach((fn) => fn(w, h));
-  }
-  window.addEventListener('resize', resize);
+function resize() {
+  const w = innerWidth, h = innerHeight;
 
+  renderer.setPixelRatio(quality.pixelRatio);
+  renderer.setSize(w, h, false);
+
+  const aspect = w / h;
+  camera.aspect = aspect;
+  // Layar portrait: mundurkan kamera supaya objek tidak terpotong di kiri/kanan
+  camera.position.z = aspect < 1 ? 9 + (1 - aspect) * 6 : 9;
+  camera.lookAt(0, 0.4, 0);
+  camera.updateProjectionMatrix();
+
+  composer.setPixelRatio(quality.pixelRatio);
+  composer.setSize(w, h);
+  resizers.forEach((fn) => fn(w, h));
+}
+window.addEventListener('resize', resize);
   const world = {
     renderer, scene, camera, composer, quality, pointer, reduced,
     onUpdate: (fn) => updaters.push(fn),
